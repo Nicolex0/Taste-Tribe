@@ -1,4 +1,5 @@
 import React from 'react'
+import About from './pages/About/About'
 import './App.css'
 
 function App() {
@@ -6,7 +7,7 @@ function App() {
   return (
     <>
       <div>
-        App
+        <About/>
       </div>
 
     </>
