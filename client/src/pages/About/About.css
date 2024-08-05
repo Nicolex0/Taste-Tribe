@@ -1,0 +1,10 @@
+.py-3 {
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 1279px;
+  height: 700px;
+
+  background: #f0fff0;
+  border: 1px solid #000000;
+}
