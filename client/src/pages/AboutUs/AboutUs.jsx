@@ -3,8 +3,8 @@ import { FaRocket, FaLightbulb, FaGlobe } from 'react-icons/fa'; // Importing ic
 
 const AboutUs = () => {
   return (
-    <div className="p-8 font-urbanist bg-backgroundGreen">
-      <section className="flex flex-col md:flex-row justify-around mb-16 space-y-6 md:space-y-0">
+    <div className="p-20 font-urbanist bg-backgroundGreen">
+      <section className="flex flex-col md:flex-row justify-around mb-16 space-y-6 md:space-y-0 md:space-x-4">
         <div className="bg-gray-100 p-6 rounded-lg text-center shadow-lg w-full md:w-1/3">
           <FaRocket className="text-4xl text-yellow-500 mb-4 mx-auto" />
           <h2 className="text-2xl font-semibold mb-4">Mission</h2>
