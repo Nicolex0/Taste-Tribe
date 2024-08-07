@@ -23,7 +23,7 @@ const AboutUs = () => {
       </section>
 
       <section className="text-center">
-        <h1 className="text-4xl font-bold mb-6">Welcome to TasteTribe.</h1>
+        <h1 className="text-4xl font-bold mb-6">Welcome to TasteTribe</h1>
         <p className="text-lg mb-8">
           Whether you're a seasoned chef or a kitchen newbie, TasteTribe offers a platform to explore new flavours,
           share your favourite dishes, and connect with like-minded food lovers.
