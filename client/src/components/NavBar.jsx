@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import {
   FaSearch,
   FaBars,
-  FaFacebook,
-  FaInstagram,
-  FaYoutube,
-  FaTiktok,
+  FaUser,
+  FaSignInAlt,
 } from "react-icons/fa";
 
 const NavBar = () => {
@@ -21,12 +19,12 @@ const NavBar = () => {
   };
 
   return (
-    <div>
+    <div className="w-full">
       <nav className="bg-customGreen text-white py-4 font-urbanist">
-        <div className="container mx-auto flex justify-between items-center">
+        <div className="container mx-auto flex justify-between items-center px-4 w-full">
           {/* Logo */}
           <div className="flex items-center">
-            {/* <img src="../assets/T.T Logo.svg" alt="Taste Tribe" className="h-8 mr-2" /> */}
+            <img src="https://via.placeholder.com/40" alt="Taste Tribe Logo" className="h-8 mr-2" />
             <span className="text-xl font-bold">Taste Tribe</span>
           </div>
 
@@ -46,13 +44,32 @@ const NavBar = () => {
             ))}
           </div>
 
-          {/* Toggle Menu and Search Icon */}
+          {/* Icons for larger screens */}
+          <div className="hidden md:flex space-x-4">
+            <a href="#" className="hover:text-gray-400">
+              <FaSearch size={24} />
+            </a>
+            <a href="#" className="hover:text-gray-400">
+              <FaUser size={24} />
+            </a>
+            <a href="#" className="hover:text-gray-400">
+              <FaSignInAlt size={24} />
+            </a>
+          </div>
+
+          {/* Toggle Menu and Search Icon for mobile */}
           <div className="flex space-x-4 md:hidden">
             <button onClick={handleMenuToggle} className="hover:text-gray-400">
               <FaBars size={24} />
             </button>
             <a href="#" className="hover:text-gray-400">
               <FaSearch size={24} />
+            </a>
+            <a href="#" className="hover:text-gray-400">
+              <FaUser size={24} />
+            </a>
+            <a href="#" className="hover:text-gray-400">
+              <FaSignInAlt size={24} />
             </a>
           </div>
 
@@ -73,13 +90,6 @@ const NavBar = () => {
               ))}
             </div>
           )}
-
-          {/* Search Icon for larger screens */}
-          <div className="hidden md:flex space-x-4">
-            <a href="#" className="hover:text-gray-400">
-              <FaSearch size={24} />
-            </a>
-          </div>
         </div>
       </nav>
     </div>

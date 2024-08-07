@@ -3,11 +3,11 @@ import { FaFacebook, FaInstagram, FaYoutube, FaTiktok } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-customGreen text-white py-3 font-urbanist">
-      <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
+    <footer className="bg-customGreen text-white py-3 font-urbanist w-full">
+      <div className="container mx-auto flex flex-col md:flex-row justify-between items-center px-4 w-full">
         {/* Logo */}
         <div className="mb-4 md:mb-0 flex items-center">
-          {/* <img src="../assets/T.T Logo.svg" alt="Taste Tribe" className="h-8 mr-2" /> */}
+          <img src="https://via.placeholder.com/40" alt="Taste Tribe Logo" className="h-8 mr-2" />
           <span className="text-xl font-bold">Taste Tribe</span>
         </div>
 
