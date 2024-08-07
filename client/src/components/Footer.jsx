@@ -7,8 +7,8 @@ const Footer = () => {
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center px-4 w-full">
         {/* Logo */}
         <div className="mb-4 md:mb-0 flex items-center">
-          <img src="https://via.placeholder.com/40" alt="Taste Tribe Logo" className="h-8 mr-2" />
-          <span className="text-xl font-bold">Taste Tribe</span>
+          <img src="https://via.placeholder.com/40" alt="TasteTribe Logo" className="h-8 mr-2" />
+          <span className="text-xl font-bold">TasteTribe</span>
         </div>
 
         {/* Navigation Links */}
@@ -48,7 +48,7 @@ const Footer = () => {
 
       {/* Copyright Notice */}
       <div className="text-center mt-4">
-        <p>©️ 2024 TASTE TRIBE</p>
+        <p>©️ 2024 TASTETRIBE</p>
       </div>
     </footer>
   );

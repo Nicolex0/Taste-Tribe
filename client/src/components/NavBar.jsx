@@ -24,8 +24,8 @@ const NavBar = () => {
         <div className="container mx-auto flex justify-between items-center px-4 w-full">
           {/* Logo */}
           <div className="flex items-center">
-            <img src="https://via.placeholder.com/40" alt="Taste Tribe Logo" className="h-8 mr-2" />
-            <span className="text-xl font-bold">Taste Tribe</span>
+            <img src="https://via.placeholder.com/40" alt="TasteTribe Logo" className="h-8 mr-2" />
+            <span className="text-xl font-bold">TasteTribe</span>
           </div>
 
           {/* Navigation Links */}
