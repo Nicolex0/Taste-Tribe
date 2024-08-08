@@ -3,17 +3,79 @@ import { TbEyeClosed } from "react-icons/tb";
 import { RiEyeCloseFill } from "react-icons/ri";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { VscLockSmall } from "react-icons/vsc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
+import { auth } from '../../firebase'; // Import the Firebase auth instance
 
 const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
+  const resetForm = () => {
+    setEmail('');
+    setPassword('');
+    setShowPassword(false);
+    setError('');
+    setSuccess('');
+  };
+
+  const handleLogin = async () => {
+    setError('');
+    setSuccess('');
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      if (!user.emailVerified) {
+        setError("Your email is not verified. Please check your inbox and verify your email before logging in.");
+        return;
+      }
+
+      // User is signed in and email is verified
+      resetForm(); // Clear form fields and reset states
+      navigate('/recipes'); // Redirect to a dashboard or homepage after login
+    } catch (error) {
+      if (error.code === 'auth/invalid-credential') {
+        setError("Invalid credentials. Please try again. If you have forgotten your password, you can reset it.");
+      } else if (error.code === 'auth/user-not-found') {
+        setError("No account found with this email. Please check your email or sign up for an account.");
+      } else if (error.code === 'auth/too-many-requests') {
+        setError("You have made too many failed login attempts. Please try again later or reset your password.");
+      } else if (error.code === 'auth/missing-password') {
+        setError("Please input password.");
+      } else {
+        setError(error.message);
+      }
+    }
+  };
+
+  const handleForgotPassword = async () => {
+    setError('');
+    setSuccess('');
+
+    try {
+      await sendPasswordResetEmail(auth, email);
+      setSuccess("Password reset email sent. Please check your inbox.");
+    } catch (error) {
+      if (error.code === 'auth/user-not-found') {
+        setError("No account found with this email.");
+      } else {
+        setError(error.message);
+      }
+    }
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100">
+    <div className="flex min-h-screen items-center justify-center bg-gray-200">
       <div className="bg-gray-100 p-8 rounded-lg max-w-4xl w-full flex flex-col md:flex-row">
         {/* Left Side - Image */}
         <div className="w-full md:w-1/2 hidden md:block">
@@ -26,11 +88,11 @@ const Login = () => {
 
         {/* Right Side - Form */}
         <div className="w-full md:w-1/2 p-6">
-          <h2 className="text-4xl font-semibold text-center mb-6">Welcome</h2>
+          <h2 className="text-4xl font-semibold text-green-800 text-center mb-6">Welcome</h2>
           <form className="relative">
             <div className="mb-8 relative">
               <label
-                className="absolute -top-3 left-6 bg-white px-1 text-gray-700 text-sm font-semibold"
+                className="absolute -top-3 left-6 bg-gray-100 px-1 text-gray-700 text-sm font-semibold"
                 htmlFor="email"
               >
                 Email
@@ -42,12 +104,14 @@ const Login = () => {
                   id="email"
                   type="email"
                   placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
             </div>
             <div className="mb-8 relative">
               <label
-                className="absolute -top-3 left-6 bg-white px-1 text-gray-700 text-sm font-semibold"
+                className="absolute -top-3 left-6 bg-gray-100 px-1 text-gray-700 text-sm font-semibold"
                 htmlFor="password"
               >
                 Password
@@ -59,6 +123,8 @@ const Login = () => {
                   id="password"
                   type={showPassword ? "text" : "password"}
                   placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
                 <button
                   type="button"
@@ -73,14 +139,21 @@ const Login = () => {
                 </button>
               </div>
               <div className="text-right mt-2">
-                <a href="#" className="text-sm text-green-900 hover:underline">
+                <button
+                  type="button"
+                  className="text-sm text-green-900 font-semibold hover:underline"
+                  onClick={handleForgotPassword}
+                >
                   Forgot Password?
-                </a>
+                </button>
               </div>
             </div>
+            {error && <p className="text-red-700 font-semibold text-center mb-4">{error}</p>}
+            {success && <p className="text-green-700 font-semibold text-center mb-4">{success}</p>}
             <button
-              className="w-full bg-green-950 text-gray-50 font-bold py-3 px-4 rounded-full focus:outline-none focus:shadow-outline"
+              className="w-full bg-green-800 text-gray-50 font-bold py-3 px-4 rounded-full focus:outline-none focus:shadow-outline"
               type="button"
+              onClick={handleLogin}
             >
               Login
             </button>
@@ -89,27 +162,15 @@ const Login = () => {
           {/* Divider */}
           <div className="flex items-center my-4">
             <hr className="flex-grow border-gray-300" />
-            <span className="mx-2 text-gray-500 text-center">-or-</span>
+            <span className="mx-2 text-gray-500 font-semibold text-center">-or-</span>
             <hr className="flex-grow border-gray-300" />
           </div>
 
           {/* Sign-Up Link */}
-          <p className="text-center">
-            Don’t have an account? <Link to='/SignUp' className="text-green-800">Sign up</Link>
+          <p className="text-center font-semibold">
+            Don’t have an account? <Link to='/signUp' className="text-green-800">Sign up</Link>
           </p>
 
-          {/* Social Icons */}
-          <div className="flex justify-center mt-6">
-            <a href="#" className="mx-2 text-gray-500 hover:text-gray-700">
-              <i className="fab fa-google"></i>
-            </a>
-            <a href="#" className="mx-2 text-gray-500 hover:text-gray-700">
-              <i className="fab fa-facebook"></i>
-            </a>
-            <a href="#" className="mx-2 text-gray-500 hover:text-gray-700">
-              <i className="fab fa-apple"></i>
-            </a>
-          </div>
         </div>
       </div>
     </div>
