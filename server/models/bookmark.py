@@ -7,4 +7,3 @@ class Bookmark(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
-
