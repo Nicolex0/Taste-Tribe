@@ -9,4 +9,3 @@ def register_blueprints(app):
     app.register_blueprint(recipes_bp)
     app.register_blueprint(users_bp)
     app.register_blueprint(spoonacular_bp)
-
