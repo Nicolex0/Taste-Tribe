@@ -66,4 +66,3 @@ def delete_recipe(recipe_id):
     db.session.delete(recipe)
     db.session.commit()
     return jsonify({"msg": "Recipe deleted"}), 200
-
