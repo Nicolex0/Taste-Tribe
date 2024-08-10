@@ -8,4 +8,3 @@ class Rating(db.Model):
     recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"), nullable=False)
     score = db.Column(db.Integer, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
-
