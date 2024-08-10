@@ -34,4 +34,3 @@ def update_profile(user_id):
     profile.bio = data.get("bio", profile.bio)
     db.session.commit()
     return jsonify(profile.to_dict())
-
