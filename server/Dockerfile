@@ -30,4 +30,3 @@ ENV PATH="/app/venv/bin:$PATH"
 
 # Run the application
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "run:app"]
-
