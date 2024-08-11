@@ -106,11 +106,11 @@ const SignUp = () => {
   );
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-200 relative">
+    <div className="flex min-h-screen items-center  justify-center bg-gray-200 relative">
       {showSuccessAlert && <SuccessAlert />} {/* Render the success alert */}
       <div className="bg-gray-100 p-8 rounded-lg max-w-4xl w-full flex flex-col md:flex-row">
         <div className="md:w-1/2 p-6">
-          <h2 className="text-4xl font-semibold text-green-800 text-center mb-6">Create Account</h2>
+          <h2 className="text-4xl font-semibold text-green-800 text-center mb-24">Create Account</h2>
           <form className="relative">
             <div className="mb-8 relative">
               <label className="absolute -top-3 left-6 bg-gray-100 px-1 text-gray-700 text-sm font-semibold" htmlFor="username">
